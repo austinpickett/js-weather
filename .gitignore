@@ -1,0 +1,4 @@
+Gulpfile.js
+dist/
+node_modules/
+src/bower_components

@@ -1,0 +1,81 @@
+html
+	color: $default
+	font: 200 22px/1.5 $font
+
+.nohover
+	pointer-events: none !important
+
+.wrapper
+	+clearfix
+	max-width: $maxWidth
+	margin: auto
+
+	@media (max-width: $maxWidth)
+		padding: 0 25px
+
+.row .col
+	padding: 0
+
++colorSelection
+	color: #FFF
+	background: black
+
+h1,h2,h3,h4,h5,h6
+	font-weight: 700
+	font-family: $font
+	margin: 0
+	text-transform: none
+
+	&:not(:first-child)
+		margin: 40px 0 0
+
+	+ p
+		margin-top: 15px
+
+h1
+	font-size: 36px
+	line-height: 1.15
+
+h2
+	font-size: 28px
+
+h3
+	font-size: 22px
+
+h4
+	font-size: 18px
+
+p, ol, ul, li
+	margin: 25px 0
+	text-align: inherit
+
+	&:first-child
+		margin-top: 0
+
+	&:last-child
+		margin-bottom: 0
+
+.lead
+	margin: 0 auto 50px
+
+strong, b
+	font-weight: 400
+
+ol li, ul li
+	margin: 5px 0
+
+ol
+	padding-left: 23px
+
+a
+	font-size: inherit
+	line-height: inherit
+	text-decoration: none
+
+figure
+	margin: 0
+	padding: 0
+
+img
+	max-width: 100%
+	height: auto

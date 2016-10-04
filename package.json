@@ -1,0 +1,41 @@
+{
+  "name": "nws-plain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-es2015": "*",
+    "babel-preset-react": "*",
+    "babelify": "*",
+    "browserify": "*",
+    "classlist-polyfill": "*",
+    "classnames": "^2.2.3",
+    "flux": "^2.1.1",
+    "gulp": "*",
+    "gulp-cssmin": "*",
+    "gulp-if": "*",
+    "gulp-imagemin": "*",
+    "gulp-notify": "*",
+    "gulp-sass": "*",
+    "gulp-server-livereload": "*",
+    "gulp-uglify": "*",
+    "gulp-useref": "*",
+    "gulp-util": "*",
+    "lodash": "^4.6.1",
+    "marked": "^0.3.5",
+    "object-assign": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-router": "*",
+    "reqwest": "*",
+    "run-sequence": "*",
+    "vinyl-buffer": "*",
+    "vinyl-source-stream": "*",
+    "watchify": "*"
+  }
+}
