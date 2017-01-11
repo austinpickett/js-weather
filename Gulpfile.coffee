@@ -66,10 +66,8 @@ gulp.task 'sass', ->
 		.pipe gulp.dest('dist/css')
 
 gulp.task 'js', -> buildScript false
-
-gulp.task 'images', ->
-	gulp.src('src/img/*.{jpg,png}')
-		.pipe gulp.dest('dist/img')
+gulp.task 'html', -> gulp.src('src/*.html').pipe gulp.dest('dist')
+gulp.task 'images', -> gulp.src('src/img/*.{jpg,png}').pipe gulp.dest('dist/img')
 
 gulp.task 'server', ->
 	gulp.src('dist')
@@ -80,8 +78,9 @@ gulp.task 'server', ->
 			fallback: 'index.html'
 		})
 
-gulp.task 'default', ['js', 'sass', 'server'], ->
+gulp.task 'default', ['html', 'images', 'server', 'js', 'sass'], ->
 	buildScript true
 
+	gulp.watch ['src/*.html'], ['html']
 	gulp.watch ['src/css/**/*.sass'], ['sass']
 	gulp.watch ['src/img/*'], ['images']
