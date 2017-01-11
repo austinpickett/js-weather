@@ -90,8 +90,8 @@ $small: 40.063em
 		background-image: -webkit-gradient(linear, 0 0, 0 50, from($to), to($from))
 		background-image: -moz-linear-gradient($to, $from)
 
-=transparentBG($color, $alpha)
-	$rgba: rgba($color, $alpha)
+=transparentBG($colour, $alpha)
+	$rgba: rgba($colour, $alpha)
 	$ie: ie-hex-str($rgba)
 
 	zoom: 1
@@ -99,9 +99,9 @@ $small: 40.063em
 	background-color: $rgba
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie},endColorstr=#{$ie})
 
-=transparentColour($color, $alpha)
-	color: $color
-	color: rgba($color, $alpha)
+=transparentColour($colour, $alpha)
+	color: $colour
+	color: rgba($colour, $alpha)
 
 // -----------------------------------------------
 
@@ -120,6 +120,14 @@ $small: 40.063em
 	-moz-text-shadow: -1px -1px 0 $colour, 1px -1px 0 $colour, -1px 1px 0 $colour, 1px 1px 0 $colour
 	-ms-text-shadow: -1px -1px 0 $colour, 1px -1px 0 $colour, -1px 1px 0 $colour, 1px 1px 0 $colour
 	-o-text-shadow: -1px -1px 0 $colour, 1px -1px 0 $colour, -1px 1px 0 $colour, 1px 1px 0 $colour
+
+=longShadow($colour, $size: 200)
+	$shadows: 0px 0px $colour
+
+	@for $i from 1 through $size
+		$shadows: #{$shadows}, #{$i}px #{$i}px #{$colour}
+
+	+textShadow($shadows)
 
 // -----------------------------------------------
 
@@ -310,7 +318,7 @@ $small: 40.063em
 	-ms-hyphen: $type
 	-o-hyphen: $type
 
-=colorSelection($el: "*")
+=colourSelection($el: "*")
 	#{$el}::selection
 		@content
 
@@ -329,7 +337,7 @@ $small: 40.063em
 	#{$el}::-o-selection
 		@content
 
-=colorPlaceholder()
+=colourPlaceholder()
 	&::-webkit-input-placeholder
 		@content
 

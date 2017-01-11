@@ -2,35 +2,20 @@ html
 	color: $default
 	font: 200 22px/1.5 $font
 
-.nohover
-	pointer-events: none !important
-
 .wrapper
 	+clearfix
 	max-width: $maxWidth
 	margin: auto
 
-	@media (max-width: $maxWidth)
-		padding: 0 25px
-
-.row .col
-	padding: 0
-
-+colorSelection
++colourSelection
 	color: #FFF
 	background: black
 
 h1,h2,h3,h4,h5,h6
 	font-weight: 700
 	font-family: $font
-	margin: 0
 	text-transform: none
-
-	&:not(:first-child)
-		margin: 40px 0 0
-
-	+ p
-		margin-top: 15px
+	margin: 0
 
 h1
 	font-size: 36px
@@ -55,16 +40,13 @@ p, ol, ul, li
 	&:last-child
 		margin-bottom: 0
 
-.lead
-	margin: 0 auto 50px
-
 strong, b
 	font-weight: 400
 
 ol li, ul li
 	margin: 5px 0
 
-ol
+ul, ol
 	padding-left: 23px
 
 a
