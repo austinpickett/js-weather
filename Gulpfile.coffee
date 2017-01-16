@@ -4,11 +4,13 @@ notify = require 'gulp-notify'
 
 source = require 'vinyl-source-stream'
 buffer = require 'vinyl-buffer'
+sequence = require 'run-sequence'
 
 sass = require 'gulp-sass'
 cssmin = require 'gulp-cssmin'
 sourcemaps = require 'gulp-sourcemaps'
 uglify = require 'gulp-uglify'
+fileinclude = require 'gulp-file-include'
 
 browserify = require 'browserify'
 babelify = require 'babelify'
@@ -65,9 +67,20 @@ gulp.task 'sass', ->
 		.pipe cssmin()
 		.pipe gulp.dest('dist/css')
 
-gulp.task 'js', -> buildScript false
-gulp.task 'html', -> gulp.src('src/*.html').pipe gulp.dest('dist')
-gulp.task 'images', -> gulp.src('src/img/*.{jpg,png}').pipe gulp.dest('dist/img')
+gulp.task 'js', ->
+	buildScript false
+
+	gulp.src('src/js/vendor/*.js').pipe gulp.dest('dist/js/vendor')
+
+gulp.task 'html', ->
+	gulp.src('src/*.html')
+		.pipe fileinclude({
+			prefix: '@@'
+			basepath: '@file'
+		}).on('error', gutil.log)
+		.pipe gulp.dest('dist')
+
+gulp.task 'images', -> gulp.src('src/img/*').pipe gulp.dest('dist/img')
 
 gulp.task 'server', ->
 	gulp.src('dist')
@@ -78,9 +91,10 @@ gulp.task 'server', ->
 			fallback: 'index.html'
 		})
 
-gulp.task 'default', ['html', 'images', 'server', 'js', 'sass'], ->
-	buildScript true
+gulp.task 'default', ->
+	sequence 'js', 'sass', 'html', 'images', 'server', ->
+		buildScript true
 
-	gulp.watch ['src/*.html'], ['html']
-	gulp.watch ['src/css/**/*.sass'], ['sass']
-	gulp.watch ['src/img/*'], ['images']
+		gulp.watch ['src/*.html', 'src/partials/*.html'], ['html']
+		gulp.watch ['src/css/**/*.sass'], ['sass']
+		gulp.watch ['src/img/*'], ['images']
