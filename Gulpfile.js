@@ -78,5 +78,5 @@ gulp.task('default', () => {
 	gulp.run('browserify')
 
 	gulp.watch(['src/*.html'], ['html'])
-	gulp.watch(['assets/css/**/*.sass'], ['sass'])
+	gulp.watch(['src/css/**/*.sass'], ['sass'])
 })
