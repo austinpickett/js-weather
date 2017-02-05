@@ -1,9 +1,8 @@
 require('babel-polyfill')
+require('classlist-polyfill')
 import reqwest from 'reqwest'
 
 const config = require('./config.json')
-
-console.log(config.API_URL)
 
 const $weatherBtn = document.querySelector('.weather-btn'),
 	  $zipcodeInput = document.querySelector('.zipcode'),
@@ -11,17 +10,38 @@ const $weatherBtn = document.querySelector('.weather-btn'),
 
 $weatherBtn.addEventListener('click', () => {
 	const zipcode = $zipcodeInput.value,
-	      request = `${config.API_URL}${zipcode}&units=imperial&appid=${config.API_KEY}`
+	      request = `${config.API_URL}${zipcode},us&units=imperial&appid=${config.API_KEY}`
 
 	reqwest({
 		url: request,
 		method: 'get',
 		type: 'jsonp',
-		error: function(err) {
+		error: (err) => {
 			console.error(err)
 		},
-		success: function(resp) {
-			$weather.innerHTML = resp.main.temp
+		success: (resp) => {
+			const weatherDesc = getWeatherDescription(resp.weather[0].main.toLowerCase())
+
+			$weather.classList.remove('hide')
+			$weather.classList.add(weatherDesc)
+
+			$weather.innerHTML = `
+				<div class="temperature">
+					<span></span>
+					${Math.floor(resp.main.temp)}&deg;F
+				</div>`
+			console.info(resp)
 		},
 	})
 })
+
+const getWeatherDescription = (weatherDesc) => {
+	console.log(weatherDesc)
+
+	switch(weatherDesc) {
+		default: case 'clear':
+			return 'sunny'
+		case 'clouds':
+			return 'cloudy'
+	}
+}
