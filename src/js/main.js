@@ -20,10 +20,8 @@ $weatherBtn.addEventListener('click', () => {
 			console.error(err)
 		},
 		success: (resp) => {
-			const weatherDesc = getWeatherDescription(resp.weather[0].main.toLowerCase())
-
 			$weather.classList.remove('hide')
-			$weather.classList.add(weatherDesc)
+			setBackgroundImage(resp.weather[0].main.toLowerCase())
 
 			$weather.innerHTML = `
 				<div class="temperature">
@@ -35,13 +33,6 @@ $weatherBtn.addEventListener('click', () => {
 	})
 })
 
-const getWeatherDescription = (weatherDesc) => {
-	console.log(weatherDesc)
-
-	switch(weatherDesc) {
-		default: case 'clear':
-			return 'sunny'
-		case 'clouds':
-			return 'cloudy'
-	}
+let setBackgroundImage = (weatherDesc) => {
+	$weather.style.backgroundImage = `url('img/${weatherDesc}.jpg')`
 }
