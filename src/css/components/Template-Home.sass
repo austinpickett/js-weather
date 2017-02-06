@@ -18,7 +18,14 @@
 
 	.temperature
 		padding: 20px 0
+		+animation(slowDisplay 1.5s)
 
 		span
 			display: block
 			text-transform: lowercase
+
++keyframes(slowDisplay)
+	0%
+		+opacity(0)
+	100%
+		+opacity(1)
